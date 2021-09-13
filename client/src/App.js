@@ -13,29 +13,48 @@ const App = () => {
     const [globalStates, setGlobalStates] = useState(
         {
             web3: null,
-            account: null,
+            accounts: null,
             signUp: false,
             instance: null
         }
     );
-    console.log(globalStates);
 
-    // useEffect(() => {
-    //     const data = localStorage.getItem('states');
-    //     if(data) {
-    //         setGlobalStates(JSON.parse(data));
-    //     }
-    // }, []);
+    // Avoid cyclic reference
+    const getCircularReplacer = () => {
+        const seen = new WeakSet();
+        return (key, value) => {
+          if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) {
+              return;
+            }
+            seen.add(value);
+          }
+          return value;
+        };
+      };
+      
+      
+      //Retrive from local storage
+    useEffect(() => {
+        const json = localStorage.getItem("states");
+        const logged = JSON.parse(json);
+        if (logged) {
+          setGlobalStates(logged);
+        }
+    }, []);
 
-    // useEffect(() => {
-    //     const data = JSON.stringify(globalStates);
-    //     localStorage.setItem('states', data);
-    // });
+    //Add to local storage
+    useEffect(() => {
+        const json = JSON.stringify(globalStates, getCircularReplacer());
+        localStorage.setItem('states', json);
+    }, [globalStates]);
+
 
     const accountSignUp = async () => {
         console.log('calling signup')
         try {
             // Get network provider and web3 instance.
+            
             const web3 = await getWeb3();
 
             // Use web3 to get the user's accounts.
@@ -49,6 +68,7 @@ const App = () => {
                 deployedNetwork && deployedNetwork.address,
             );
 
+            
             // Set web3, accounts, signup to the global state.
             setGlobalStates({web3, accounts, signUp: true, instance});
 
