@@ -44,6 +44,17 @@ export const styledInput = makeStyles((theme) => ({
             backgroundColor : theme.palette.primary.main
           }
     },
+    button:{
+      marginLeft:"auto",
+      marginRight:"15px",
+      [theme.breakpoints.down('md')]: {
+        marginLeft:0,
+        marginRight:0,
+    },
+    [theme.breakpoints.down('xs')]: {
+      width:"75vw"
+  },
+    }
   }));
 
   export function CustomInput(props) {

@@ -1,5 +1,6 @@
 import { Container, makeStyles } from '@material-ui/core'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -17,7 +18,9 @@ export default function Footer() {
         <>
                 <div className={classes.root}>
                     <Container>
+                        <Link style={{textTransform:"none", color:"inherit"}} to="/">
                         NFTZAP
+                        </Link>
                     </Container>
                 </div>
         </>

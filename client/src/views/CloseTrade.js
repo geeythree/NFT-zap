@@ -38,10 +38,10 @@ export default function CloseTrade() {
                             className={classes.margin} 
                             label="Get Contract" 
                             variant="outlined" />
-                        
+                            <Button className={classes.button}>Get Contract</Button>
                     </Grid>
                 </div>
-                <Button>Get Contract</Button>
+                <Button>Withdraw</Button>
             </Container>
         </>
     )
