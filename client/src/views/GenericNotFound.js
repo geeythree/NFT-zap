@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-export default function Notfound() {
+export default function GenericNotFound() {
     const classes = useStyles()
     return (
         <>

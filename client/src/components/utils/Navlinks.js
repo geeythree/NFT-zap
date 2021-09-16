@@ -5,8 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Divider, Drawer } from '@material-ui/core';
-import Menu from './menu.svg'
-import AppContext from '../components/AppContext';
+import Menu from '../../assets/menu.svg'
+import AppContext from '../../components/AppContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,10 +41,14 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
+//Different functional components for mobile and desktop views
+
 export default function Navlinks(props) {
     const classes = useStyles();
-    const globalContext = useContext(AppContext)
-    const preventDefault = (event) => event.preventDefault();
+    const globalContext = useContext(AppContext)  //check if user is logged in - inorder to display logout button
+    const preventDefault = (event) => event.preventDefault(); 
+    
+    // listen to window size for mobile and desktop views
     const [state, setState] = useState({
         mobile: false,
     })
@@ -57,10 +61,12 @@ export default function Navlinks(props) {
             setState({ ...state, [anchor]: open });
           };
     
+    //temporary logout method
     const logout = () => {
         localStorage.removeItem("states");
     }
 
+    //component for mobile view
     const list = (anchor) => {
         return(
             <div 
@@ -83,6 +89,7 @@ export default function Navlinks(props) {
         )
     }
 
+    //component for mobile view
     const deskptopView = () => {
         return(
             

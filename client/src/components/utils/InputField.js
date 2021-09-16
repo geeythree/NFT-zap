@@ -1,6 +1,8 @@
 import { alpha, makeStyles, TextField } from "@material-ui/core";
 import React from 'react'
 
+//Create custom-styled input field
+
 export const styledInput = makeStyles((theme) => ({
     container:{
         display:"flex",

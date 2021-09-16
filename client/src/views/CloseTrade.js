@@ -1,6 +1,6 @@
 import { Button, Container, CssBaseline, Grid, Typography } from '@material-ui/core'
 import React from 'react'
-import {CustomInput, styledInput} from '../components/InputField'
+import {CustomInput, styledInput} from '../components/utils/InputField.js'
 
 export default function CloseTrade() {
     const classes = styledInput()

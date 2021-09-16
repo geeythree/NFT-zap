@@ -4,12 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Navlinks from "./Navlinks";
-import { useHistory } from "react-router";
+import Navlinks from "./utils/Navlinks";
 import { Link } from "react-router-dom";
+import { Box } from "@material-ui/core";
+import { theme } from "../theme";
+import Login from "./Login";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,12 +33,25 @@ const useStyles = makeStyles((theme) => ({
     links : {
         marginRight : "auto",
     },
+    account:{
+        backgroundColor:theme.palette.secondary.main,
+        maxWidth:"150px",
+        height:"40px",
+        display: "flex",
+        alignItems: "center",
+        borderRadius: "5px",
+        padding: "0 10px",
+        overflow:"hidden",
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+    }
   }));
 
-const Navbar = ({signUp}) => {
-    const globalContext = useContext(AppContext);
+const Navbar = () => {
+    const globalContext = useContext(AppContext); //check if user signed up or not
     const classes = useStyles();
 
+    //Listen to windows size
     const [state, setState] = useState({
         mobile: false,
     })
@@ -56,8 +69,6 @@ const Navbar = ({signUp}) => {
         }, []);
 
     
-    const history = useHistory();
-    const route = () => history.push('/')
 
     return (
         <div className={classes.root}>
@@ -75,14 +86,20 @@ const Navbar = ({signUp}) => {
                     { !globalContext.signUp &&  
                             <>
                             {!mobileView ? <Navlinks view="desktop" /> : ''}
-                            <Button color="inherit" onClick={signUp}>Sign in</Button>
+                            <Login />   
                             </>
                     }
                     { globalContext.signUp && 
                             <>
                             {!mobileView ? 
                             <>
-                            <Typography>Account: {globalContext.accounts[0]} </Typography>
+                                <Box 
+                                p={1} 
+                                m={1}
+                            component="span"
+                            textOverflow="ellipsis"
+                            overflow="hidden"
+                            bgcolor={theme.palette.secondary.main}>{globalContext.accounts[0]} </Box>
                             <div style={{marginLeft:"50px"}}><Navlinks view="mobile" /></div>
                             </>
                             : <Navlinks view="mobile" />}

@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme)=>({
     }
 }))
 
+//Display buttons for make and close trades
 export default function TradesPage() {
     const classes = useStyles()
     return (

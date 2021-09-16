@@ -1,6 +1,7 @@
-import { createMuiTheme} from '@material-ui/core';
+import { createTheme} from '@material-ui/core';
 
-export const theme = createMuiTheme({
+//Override default Material-UI theme
+export const theme = createTheme({
     typography: {
         fontFamily: 'Scada',
         allVariants: {

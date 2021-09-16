@@ -1,7 +1,7 @@
 import { Button, Container, CssBaseline, Grid, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import graphics from './temp-graphics.svg'
+import graphics from '../assets/temp-graphics.svg'
 
 const useStyles = makeStyles((theme) => ({
     text : {

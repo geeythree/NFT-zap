@@ -1,13 +1,9 @@
 import React, {useEffect} from 'react'
 import AppContext from './components/AppContext';
 import {useState} from 'react';
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
-import getWeb3 from "./getWeb3";
-import Navbar from './components/Navbar';
-import { ThemeProvider } from '@material-ui/styles';
-import { theme } from './theme';
-import {BrowserRouter as Router} from 'react-router-dom'
 //import Navbar from './components/Navbar';
+
+//Code moved to Login.js in components folder
 
 export const GlobalState = ({children}) => {
   const [globalStates, setGlobalStates] = useState(
@@ -21,6 +17,7 @@ export const GlobalState = ({children}) => {
 
 
 // Avoid cyclic reference
+/* 
 const getCircularReplacer = () => {
     const seen = new WeakSet();
     return (key, value) => {
@@ -33,18 +30,21 @@ const getCircularReplacer = () => {
       return value;
     };
   };
-  
+
+*/  
+
   
   //Retrive from local storage
   useEffect(() => {
     const json = localStorage.getItem("states");
-    //console.log("JSON", json)
     const logged = JSON.parse(json);
-    if (logged) {
+    if (logged.signUp==true) {
+      console.log('Logged',logged)
       setGlobalStates(logged);
     }
   }, []);
 
+ /* 
   //Add to local storage
   useEffect(() => {
     const json = JSON.stringify(globalStates, getCircularReplacer());
@@ -85,16 +85,11 @@ const accountSignUp = async () => {
         console.error(error);
     }
 }
+ */
 
 return (
    <AppContext.Provider value={globalStates}>
-        <ThemeProvider theme={theme}>
-          <Router>
-            <Navbar signUp={accountSignUp} />
-          
-          {children}
-          </Router>
-        </ThemeProvider>
+            {children}
     </AppContext.Provider>
 );
 }

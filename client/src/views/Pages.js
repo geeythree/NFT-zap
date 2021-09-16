@@ -1,16 +1,15 @@
-import { ThemeProvider } from '@material-ui/styles'
 import React, { useContext } from 'react'
-import { BrowserRouter as Router,Route, Switch } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import AppContext from '../components/AppContext'
-import { theme } from '../theme'
 import TradesPage from './TradesPage'
 import Landingpage from './Landingpage'
 import MakeTrade from './MakeTrade'
 import CloseTrade from './CloseTrade'
-import Notfound from './Notfound'
-import Footer from '../components/Footer'
 import Login from './Login'
+import GenericNotFound from './GenericNotFound'
 
+//Route to different view 
+//Need to add 'Not Found' page and redirect if user is not logged-in
 export default function Pages() {
     const globalStates = useContext(AppContext)
     return (
@@ -25,3 +24,4 @@ export default function Pages() {
         </>
     )
 }
+
