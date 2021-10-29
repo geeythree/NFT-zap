@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Navlinks from "./utils/Navlinks";
 import { Link } from "react-router-dom";
-import { Box } from "@material-ui/core";
+import { Box, Popover } from "@material-ui/core";
 import { theme } from "../theme";
 import Login from "./Login";
 
@@ -51,6 +51,18 @@ const Navbar = () => {
     const globalContext = useContext(AppContext); //check if user signed up or not
     const classes = useStyles();
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handlePopoverOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handlePopoverClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+
     //Listen to windows size
     const [state, setState] = useState({
         mobile: false,
@@ -67,7 +79,6 @@ const Navbar = () => {
     return () => 
         {window.removeEventListener("resize", () => setResponsive())}
         }, []);
-
     
 
     return (
@@ -79,27 +90,58 @@ const Navbar = () => {
                         !globalContext.signUp && mobileView? 
                             <Navlinks view="mobile" /> : ''
                         }
-                        <Link to="/">
+                        <Link style={{textDecoration:"none"}} to="/">
                             <Typography variant="h3">NFTZAP</Typography>
                         </Link>
                     </IconButton>
                     { !globalContext.signUp &&  
                             <>
                             {!mobileView ? <Navlinks view="desktop" /> : ''}
-                            <Login />   
                             </>
                     }
                     { globalContext.signUp && 
                             <>
                             {!mobileView ? 
                             <>
-                                <Box 
-                                p={1} 
-                                m={1}
+                            <Box
+                            p={1} 
+                            m={1}
+                            aria-owns={open ? 'mouse-over-popover' : undefined}
+                            aria-haspopup="true"
+                            onMouseEnter={handlePopoverOpen}
+                            onMouseLeave={handlePopoverClose}
+                            style={{ border: '0.05em dotted orange',width:"150px",cursor:'pointer'}}
                             component="span"
                             textOverflow="ellipsis"
-                            overflow="hidden"
-                            bgcolor={theme.palette.secondary.main}>{globalContext.accounts[0]} </Box>
+                            overflow="hidden">
+                                Hello!
+                            <Box 
+                                m={1}
+                                style={{ cursor:'pointer'}}
+                                component="span"
+                                textOverflow="ellipsis"
+                                overflow="hidden">{globalContext.accounts[0]} </Box>
+                            </Box>
+                            <Popover
+                                id="mouse-over-popover"
+                                style={{
+                                pointerEvents: 'none',
+                                }}
+                                open={open}
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                                }}
+                                onClose={handlePopoverClose}
+                                disableRestoreFocus
+                            >
+                                <Typography style={{ color:"orange"}}>{globalContext.accounts[0]}</Typography>
+                            </Popover>
                             <div style={{marginLeft:"50px"}}><Navlinks view="mobile" /></div>
                             </>
                             : <Navlinks view="mobile" />}

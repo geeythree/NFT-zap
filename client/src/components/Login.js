@@ -28,12 +28,6 @@ export default function Login() {
         };
       };
       
-      const store = (globalStates) =>{
-        console.log('global',globalStates)
-        const json = JSON.stringify(globalStates, getCircularReplacer());
-        localStorage.setItem('states', json)
-      }
-      store(globalStates);
       
 
       const accountSignUp = async () => {

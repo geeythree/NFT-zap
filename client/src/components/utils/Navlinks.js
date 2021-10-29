@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
       },
     listitem:{
         padding:"25px",
+        textDecoration:"none"
     },
     paper:{
         backgroundColor:'#0f0f0f',
@@ -37,6 +38,13 @@ const useStyles = makeStyles((theme) => ({
         marginRight:"20px",
         '&:hover':{
             cursor: 'pointer'
+        }
+    },
+    item:{
+        cursor:"pointer",
+        '&:hover':{
+            textDecoration:"none",
+            color:'orange'
         }
     }
   }));
@@ -84,6 +92,7 @@ export default function Navlinks(props) {
                         globalContext.signUp ?
                         <ListItem className={classes.listitem} onClick={logout} button>Logout</ListItem> : ''
                     }
+
                 </List>
             </div>
         )
@@ -96,16 +105,22 @@ export default function Navlinks(props) {
             <>
             <div className={classes.links_group}>
                 <Typography className={classes.root}>
-                <Link href="#" onClick={preventDefault} color="inherit">
+                <Link href="#" className={classes.item} onClick={preventDefault} color="inherit">
                     Whitepaper
                 </Link>
-                <Link href="#" onClick={preventDefault} color="inherit">
+                <Link href="#" className={classes.item} onClick={preventDefault} color="inherit">
                     Docs
                 </Link>
-                <Link href="#" onClick={preventDefault} color="inherit">
+                <Link href="#" className={classes.item} onClick={preventDefault} color="inherit">
                     How to use
                 </Link>
+                {
+                        globalContext.signUp ?
+                        <Link className={classes.item} color='inherit' onClick={logout} button>Logout</Link> : ''
+                }
                 </Typography>
+                
+                    
             </div>
             </>
         )
@@ -113,14 +128,8 @@ export default function Navlinks(props) {
 
     return (
         <>
-            {
-                props.view=="desktop" ? deskptopView() :
-                <>
-                <img width="25px" onClick={toggleDrawer('right', true)} className={classes.menu} src={Menu} alt="Menu" />
-                <Drawer classes={{paper:classes.paper}}  anchor="right" open={state['right']} onClose={toggleDrawer('right', false)}>
-                    {list('right')}
-                </Drawer>
-                </>
+            { deskptopView()
+                
             }
         </>
     )

@@ -35,6 +35,7 @@ const getCircularReplacer = () => {
 
   
   //Retrive from local storage
+ /*
   useEffect(() => {
     const json = localStorage.getItem("states");
     const logged = JSON.parse(json);
@@ -44,6 +45,7 @@ const getCircularReplacer = () => {
     }
   }, []);
 
+ */
  /* 
   //Add to local storage
   useEffect(() => {

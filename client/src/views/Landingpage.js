@@ -2,6 +2,7 @@ import { Button, Container, CssBaseline, Grid, makeStyles, Typography } from '@m
 import React from 'react'
 import { Link } from 'react-router-dom'
 import graphics from '../assets/temp-graphics.svg'
+import '../css/bg_effect.css'
 
 const useStyles = makeStyles((theme) => ({
     text : {
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             marginLeft: 0,
         },
+    },
+    buttons : {
+        marginRight:"10px",
     }
 }))
 
@@ -44,8 +48,11 @@ export default function Landingpage() {
                             aligua.
                             </Typography>
                             <div >
-                            <Link to="/trades">
-                                <Button >Get Started</Button>
+                            <Link to="/maketrade" className={classes.buttons}>
+                                <Button style={{padding:'20px 70px'}}>Make trade</Button>
+                            </Link>
+                            <Link to="closetrade" className={classes.buttons}>
+                                <Button style={{padding:'20px 70px'}}>Close trade</Button>
                             </Link>
                             </div>
                         </Grid>
@@ -56,6 +63,7 @@ export default function Landingpage() {
                         </Grid>
                     </Grid> 
                  </Container>
+                 
         </>
     )
 }
