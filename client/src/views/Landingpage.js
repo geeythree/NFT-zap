@@ -3,6 +3,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import graphics from '../assets/temp-graphics.svg'
 import '../css/bg_effect.css'
+import About from './About'
+import Howto from './Howto'
+import Roadmap from './Roadmap'
+import Team from './Team'
 
 const useStyles = makeStyles((theme) => ({
     text : {
@@ -63,7 +67,10 @@ export default function Landingpage() {
                         </Grid>
                     </Grid> 
                  </Container>
-                 
+                 <About />
+                 <Roadmap />
+                 <Howto />
+                 <Team />
         </>
     )
 }

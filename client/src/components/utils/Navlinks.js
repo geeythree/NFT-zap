@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Divider, Drawer } from '@material-ui/core';
 import Menu from '../../assets/menu.svg'
 import AppContext from '../../components/AppContext';
+import {links} from './links.js'
+import { Link } from 'react-scroll';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     },
     item:{
         cursor:"pointer",
+        color:"white",
         '&:hover':{
             textDecoration:"none",
             color:'orange'
@@ -83,11 +85,16 @@ export default function Navlinks(props) {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}>
                 <List >
-                    <ListItem className={classes.listitem} button key="whitepaper">Whitepaper</ListItem>
-                    <Divider />
-                    <ListItem className={classes.listitem} button>Docs</ListItem>
-                    <Divider />
-                    <ListItem className={classes.listitem} button>How to use</ListItem>
+                    {links.map(link => {
+                        return(
+                            <>
+                            <Link to={link.element}>
+                                <ListItem className={classes.listitem} button key={link.element}>About Us</ListItem>
+                            </Link>
+                            <Divider />
+                            </>
+                        )
+                    })}
                     {
                         globalContext.signUp ?
                         <ListItem className={classes.listitem} onClick={logout} button>Logout</ListItem> : ''
@@ -105,18 +112,20 @@ export default function Navlinks(props) {
             <>
             <div className={classes.links_group}>
                 <Typography className={classes.root}>
-                <Link href="#" className={classes.item} onClick={preventDefault} color="inherit">
-                    Whitepaper
-                </Link>
-                <Link href="#" className={classes.item} onClick={preventDefault} color="inherit">
-                    Docs
-                </Link>
-                <Link href="#" className={classes.item} onClick={preventDefault} color="inherit">
-                    How to use
-                </Link>
+                    {
+                        links.map(link => {
+                            return(
+                                <>
+                                <Link to={link.element} className={classes.item} onClick={preventDefault} color="inherit">
+                                    {link.name}
+                                </Link>
+                                </>
+                            )
+                        })
+                    }
                 {
                         globalContext.signUp ?
-                        <Link className={classes.item} color='inherit' onClick={logout} button>Logout</Link> : ''
+                        <Link className={classes.item} onClick={logout} button>Logout</Link> : ''
                 }
                 </Typography>
                 
